@@ -9,7 +9,7 @@ function ForgotPassword() {
     e.preventDefault();
     try {
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-//console.log("API Base URL:", API_BASE_URL); // Debugging
+console.log("API Base URL:", API_BASE_URL); // Debugging
 
       const response = await axios.post(`${API_BASE_URL}/api/forgot-password`, { email });
       setMessage(response.data.message);

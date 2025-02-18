@@ -12,7 +12,6 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
       const response = await axios.post(`${API_BASE_URL}/api/users`, { email, password });
       setMessage(response.data.message);
       // After a successful registration, wait a few seconds then redirect
