@@ -8,7 +8,7 @@ function ForgotPassword() {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/forgot-password`, { email });
+      const response = await axios.post(`${API_BASE_URL}/api/forgot-password', { email });
       setMessage(response.data.message);
     } catch (error) {
       console.error('Forgot password error:', error.response?.data);

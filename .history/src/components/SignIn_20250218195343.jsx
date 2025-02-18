@@ -2,31 +2,36 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Register() {
+function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/users`, { email, password });
+      const response = await axios.post('$http://localhost:5000/api/signin', { email, password });
       setMessage(response.data.message);
-      // After a successful registration, wait a few seconds then redirect
+      // Redirect to dashboard or home page after sign in
       setTimeout(() => {
-        navigate('/signin');
-      }, 2000); // 2-second delay (adjust as needed)
+        navigate('/dashboard');
+      }, 2000);
     } catch (error) {
-      console.error('Registration error:', error.response?.data);
-      setMessage(error.response?.data.message || 'Error occurred. Please try again.');
+      console.error('Sign in error:', error.response?.data);
+      setMessage(error.response?.data.message || 'Sign in failed.');
     }
+  };
+
+  const handleForgotPassword = () => {
+    // Navigate to the Forgot Password page
+    navigate('/forgot-password');
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-5 shadow rounded">
-      <h2 className="text-xl font-bold mb-4">Register</h2>
-      <form onSubmit={handleRegister}>
+      <h2 className="text-xl font-bold mb-4">Sign In</h2>
+      <form onSubmit={handleSignIn}>
         <input
           type="email"
           placeholder="Enter your email"
@@ -44,12 +49,18 @@ function Register() {
           required
         />
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
-          Register
+          Sign In
         </button>
       </form>
+      <button
+        onClick={handleForgotPassword}
+        className="mt-4 text-blue-500 underline text-center w-full"
+      >
+        Forgot Password?
+      </button>
       {message && <p className="mt-4 text-center">{message}</p>}
     </div>
   );
 }
 
-export default Register;
+export default SignIn;

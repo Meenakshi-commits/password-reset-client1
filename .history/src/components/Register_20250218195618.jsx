@@ -11,7 +11,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/users`, { email, password });
+      const response = await axios.post(/api/users', { email, password });
       setMessage(response.data.message);
       // After a successful registration, wait a few seconds then redirect
       setTimeout(() => {

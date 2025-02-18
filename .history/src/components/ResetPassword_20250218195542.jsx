@@ -15,7 +15,7 @@ function ResetPassword() {
     // Optionally, verify the token when the component mounts
     const verifyToken = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/verify-token?token=${token}`);
+        const response = await axios.get(`/api/verify-token?token=${token}`);
         if (!response.data.valid) {
           setMessage('Invalid or expired token.');
         }
